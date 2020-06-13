@@ -7,7 +7,7 @@ const App = () => {
 	return (
 		<>
 			<Navbar color="info">
-				<h1 style={{ color: 'whitesmoke' }}>WeEat</h1>
+				<h1 style={{ color: 'whitesmoke' }}>Lambda Eats</h1>
 
 				<Link to={'/'}>
 					<Button color="info">Home</Button>

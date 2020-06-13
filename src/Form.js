@@ -1,6 +1,4 @@
-/** @format */
-
-import React, { useState } from 'react';
+import React, { useState  } from 'react';
 import {
 	Card,
 	CardImg,
@@ -10,7 +8,6 @@ import {
 	Dropdown,
 	DropdownToggle,
   DropdownMenu,
-  DropdownItem,
 	Label,
 	Button,
 } from 'reactstrap';
@@ -32,6 +29,8 @@ const OrderForm = () => {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+
+  
   
   const schema = yup.object().shape({
 		name: yup.string().required('Name must be filled out').min(2),
@@ -60,6 +59,7 @@ const submit = () => {
 	});
 };
 
+
 	return (
 		<>
 			{/* Creating header with Card and CardImg */}
@@ -76,6 +76,7 @@ const submit = () => {
 			{/* Creating Name for form */}
 
 			<Form
+				data-cy="submit"
 				onSubmit={(e) => {
 					e.preventDefault();
 					submit();
@@ -84,22 +85,54 @@ const submit = () => {
 			>
 				<FormGroup>
 					<legend>Name</legend>
-					<Input type="name" name="name" onChange={handleChange} />
+					<Input
+						type="name"
+						data-cy="name"
+						name="name"
+						onChange={handleChange}
+					/>
 				</FormGroup>
 
 				{/* Creating dropdown for how many pizza's */}
 
 				<FormGroup>
 					<Dropdown isOpen={dropdownOpen} toggle={toggle}>
-						{/* Creating ternary expression if else statement formData.number, IF it is true (if equal to 0 is that true or not) then we can have number of pizza's display, ELSE put the formData.number  */}
-
-						<DropdownToggle caret>Choose Your Size</DropdownToggle>
-
+						<DropdownToggle caret>
+							{formData.size === '' ? 'Pizza Size' : formData.size}
+						</DropdownToggle>
 						<DropdownMenu>
-							<DropdownItem>Small</DropdownItem>
-							<DropdownItem>Medium</DropdownItem>
-							<DropdownItem>Large</DropdownItem>
-							<DropdownItem>Extra Large</DropdownItem>
+							<div
+								onClick={() => {
+									toggle();
+									setFormData({ ...formData, size: 'Small' });
+								}}
+							>
+								Small
+							</div>
+							<div
+								onClick={() => {
+									toggle();
+									setFormData({ ...formData, size: 'Medium' });
+								}}
+							>
+								Medium
+							</div>
+							<div
+								onClick={() => {
+									toggle();
+									setFormData({ ...formData, size: 'Large' });
+								}}
+							>
+								Large
+							</div>
+							<div
+								onClick={() => {
+									toggle();
+									setFormData({ ...formData, size: 'Extra Large' });
+								}}
+							>
+								Extra Large
+							</div>
 						</DropdownMenu>
 					</Dropdown>
 				</FormGroup>
@@ -114,7 +147,8 @@ const submit = () => {
 							<Input
 								type="radio"
 								name="sauce"
-								value="red"
+                value="red"
+                data-cy="red"
 								checked={formData.red}
 								onChange={handleChange}
 							/>
@@ -127,7 +161,8 @@ const submit = () => {
 							<Input
 								type="radio"
 								name="sauce"
-								value="garlic"
+                value="garlic"
+                data-cy="garlic"
 								checked={formData.garlic}
 								onChange={handleChange}
 							/>
@@ -140,7 +175,8 @@ const submit = () => {
 							<Input
 								type="radio"
 								name="sauce"
-								value="bbq"
+                value="bbq"
+                data-cy="bbq"
 								checked={formData.bbq}
 								onChange={handleChange}
 							/>
@@ -153,7 +189,8 @@ const submit = () => {
 							<Input
 								type="radio"
 								name="sauce"
-								value="alfredo"
+                value="alfredo"
+                data-cy="alfredo"
 								checked={formData.alfredo}
 								onChange={handleChange}
 							/>
@@ -166,31 +203,56 @@ const submit = () => {
 					<FormGroup check>
 						<legend>Toppings</legend>
 						<Label check></Label>
-						<Input type="checkbox" name="pepperoni" onChange={handleTopping} />
+						<Input
+							type="checkbox"
+							data-cy="checkbox1"
+							name="pepperoni"
+							onChange={handleTopping}
+						/>
 						Pepperoni
 					</FormGroup>
 
 					<FormGroup check>
 						<Label check></Label>
-						<Input type="checkbox" name="sausage" onChange={handleTopping} />
+						<Input
+							type="checkbox"
+							data-cy="checkbox2"
+							name="sausage"
+							onChange={handleTopping}
+						/>
 						Sausage
 					</FormGroup>
 
 					<FormGroup check>
 						<Label check></Label>
-						<Input type="checkbox" name="asiago" onChange={handleTopping} />
+						<Input
+							type="checkbox"
+							data-cy="checkbox3"
+							name="asiago"
+							onChange={handleTopping}
+						/>
 						Asiago Cheese
 					</FormGroup>
 
 					<FormGroup check>
 						<Label check></Label>
-						<Input type="checkbox" name="meatball" onChange={handleTopping} />
+						<Input
+							type="checkbox"
+							data-cy="checkbox4"
+							name="meatball"
+							onChange={handleTopping}
+						/>
 						MeatBall
 					</FormGroup>
 
 					<FormGroup check>
 						<Label check></Label>
-						<Input type="checkbox" name="xcheese" onChange={handleTopping} />
+						<Input
+							type="checkbox"
+							data-cy="checkbox5"
+							name="xcheese"
+							onChange={handleTopping}
+						/>
 						Extra Cheese
 					</FormGroup>
 				</FormGroup>
@@ -207,7 +269,7 @@ const submit = () => {
 					/>
 				</FormGroup>
 
-				{/* Creating textarea for special instructions */}
+				
 				<Button>Submit</Button>
 			</Form>
 		</>
